@@ -1,0 +1,14 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: tekton-base
+  namespace: flux-system
+spec:
+  interval: 5m
+  path: ./tekton-base
+  prune: true
+  validation: client
+  sourceRef:
+    kind: GitRepository
+    name: kontainer-sh
+
