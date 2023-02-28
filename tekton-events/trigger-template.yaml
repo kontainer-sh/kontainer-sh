@@ -1,0 +1,32 @@
+apiVersion: triggers.tekton.dev/v1beta1
+kind: TriggerTemplate
+metadata:
+  name: trigger-demo-template
+  annotations:
+    triggers.tekton.dev/old-escape-quotes: "true"
+spec:
+  params:
+    - name: commits
+      description: The commits which got pushed
+    - name: gitRepository
+      description: The git repository that hosts context
+  resourcetemplates:
+    - apiVersion: tekton.dev/v1beta1
+      kind: PipelineRun
+      metadata:
+        name: buildpacks-test-pipeline-run
+      spec:
+        pipelineRef:
+          name: buildpacks-test-pipeline
+        workspaces:
+          - name: source-workspace
+            subPath: source
+            persistentVolumeClaim:
+              claimName: buildpacks-source-pvc
+          - name: cache-workspace
+            subPath: cache
+            persistentVolumeClaim:
+              claimName: buildpacks-source-pvc
+        params:
+          - name: image
+            value: registry.kube-system.svc.cluster.local:80/hello-world:1.0

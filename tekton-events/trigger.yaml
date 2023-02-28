@@ -1,0 +1,24 @@
+apiVersion: triggers.tekton.dev/v1beta1
+kind: Trigger
+metadata:
+  name: github-listener
+spec:
+  interceptors:
+    - ref:
+        name: "github"
+      params:
+        - name: "secretRef"
+          value:
+            secretName: ci-webhook
+            secretKey: secret
+        - name: "eventTypes"
+          value: ["push"]
+    - ref:
+        name: "cel"
+      params:
+        - name: "filter"
+          value: body.ref == 'refs/heads/main'
+  bindings:
+    - ref: github-binding
+  template:
+    ref: trigger-demo-template

@@ -1,0 +1,11 @@
+apiVersion: triggers.tekton.dev/v1beta1
+kind: EventListener
+metadata:
+  name: trigger-demo-el
+spec:
+  serviceAccountName: tekton-ci-listener
+  triggers:
+    - triggerRef: github-listener
+  resources:
+    kubernetesResource:
+      serviceType: NodePort
