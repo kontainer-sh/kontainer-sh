@@ -7,7 +7,7 @@ spec:
   interval: 5m0s
   sourceRef:
     kind: GitRepository
-    name: flux-system
+    name: kontainer-sh
   path: ./tekton-events-base
   dependsOn:
   - name: tekton-tasks
