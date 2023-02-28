@@ -23,14 +23,6 @@ roleRef:
   name: triggers-minimal
 ---
 apiVersion: v1
-kind: Secret
-metadata:
-  name: ci-webhook
-type: Opaque
-stringData:
-  secret: "1234567"
----
-apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: tekton-ci-listener
