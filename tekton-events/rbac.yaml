@@ -1,61 +1,30 @@
----
-kind: ClusterRole
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: triggers-minimal
-rules:
-  # EventListeners need to be able to fetch any clustertriggerbindings
-  - apiGroups: ["triggers.tekton.dev"]
-    resources: ["clustertriggerbindings", "clusterinterceptors"]
-    verbs: ["get", "list", "watch"]
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: tekton-ci-listener-triggers-minimal
-subjects:
-  - kind: ServiceAccount
-    name: tekton-ci-listener
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: triggers-minimal
----
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: tekton-ci-listener
-secrets:
-  - name: ci-webhook
+  name: tekton-triggers-example-sa
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: tekton-ci-listener-triggers-minimal
+  name: triggers-example-eventlistener-binding
 subjects:
-  - kind: ServiceAccount
-    name: tekton-ci-listener
+- kind: ServiceAccount
+  name: tekton-triggers-example-sa
 roleRef:
   apiGroup: rbac.authorization.k8s.io
-  kind: Role
-  name: triggers-minimal
+  kind: ClusterRole
+  name: tekton-triggers-eventlistener-roles
 ---
-kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
 metadata:
-  name: triggers-minimal
-rules:
-  - apiGroups: [""]
-    resources: ["configmaps", "secrets"]
-    verbs: ["get", "list", "watch"]
-  - apiGroups: ["triggers.tekton.dev"]
-    resources:
-      ["eventlisteners", "triggerbindings", "triggertemplates", "triggers"]
-    verbs: ["get", "list", "watch"]
-  - apiGroups: ["tekton.dev"]
-    resources: ["pipelineruns", "pipelineresources", "taskruns"]
-    verbs: ["create"]
-  - apiGroups: [""]
-    resources: ["serviceaccounts"]
-    verbs: ["impersonate"]
+  name: triggers-example-eventlistener-clusterbinding
+subjects:
+- kind: ServiceAccount
+  name: tekton-triggers-example-sa
+  namespace: default
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: tekton-triggers-eventlistener-clusterroles
 
