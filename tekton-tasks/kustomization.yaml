@@ -4,3 +4,4 @@ namespace: tekton-pipelines
 resources:
 - https://raw.githubusercontent.com/tektoncd/catalog/master/task/buildpacks/0.3/buildpacks.yaml
 - https://raw.githubusercontent.com/tektoncd/catalog/master/task/git-clone/0.4/git-clone.yaml
+- https://api.hub.tekton.dev/v1/resource/tekton/task/kubernetes-actions/0.2/raw
