@@ -16,6 +16,7 @@ spec:
       metadata:
         name: buildpacks-test-pipeline-run
       spec:
+        serviceAccountName: tekton-kubectl-service-account
         pipelineRef:
           name: buildpacks-test-pipeline
         workspaces:
