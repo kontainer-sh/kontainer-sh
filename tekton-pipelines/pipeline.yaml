@@ -42,7 +42,8 @@ spec:
         - name: BUILDER_IMAGE
           value: paketobuildpacks/builder:base # This is the builder we want the task to use (REQUIRED)
     - name: restart-deployment
-      runAfter: buildpacks
+      runAfter:
+        - buildpacks
       taskRef:
         name: kubernetes-actions
       params:
