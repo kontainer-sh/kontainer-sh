@@ -27,6 +27,9 @@ spec:
             subPath: cache
             persistentVolumeClaim:
               claimName: buildpacks-source-pvc
+          - name: kubeconfig-dir
+            configMap:
+              name: kubeconfig
         params:
           - name: image
             value: registry.kube-system.svc.cluster.local:80/hello-world:1.0

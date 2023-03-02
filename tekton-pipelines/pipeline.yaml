@@ -46,10 +46,6 @@ spec:
         - buildpacks
       taskRef:
         name: kubernetes-actions
-      workspaces:
-        - name: kubeconfig-dir
-          configMap:
-            name: kubeconfig
       params:
       - name: script
         value: |
