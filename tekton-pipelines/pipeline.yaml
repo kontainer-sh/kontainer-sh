@@ -41,9 +41,17 @@ spec:
           value: "sample-app" # This is the path within the samples repo you want to build (OPTIONAL, default: "")
         - name: BUILDER_IMAGE
           value: paketobuildpacks/builder:base # This is the builder we want the task to use (REQUIRED)
+    - name: restart-deployment
+      runAfter: buildpacks
+      taskRef:
+        name: kubernetes-actions
+      params:
+      - name: script
+        value: |
+          kubectl -n default rollout restart deploy hello-world
     - name: display-results
       runAfter:
-        - buildpacks
+        - restart-deployment
       taskSpec:
         steps:
           - name: print
