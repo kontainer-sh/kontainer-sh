@@ -39,7 +39,7 @@ Install Flux components with Flux bootstrap:
 
 The above command creates the GitHub repository (if it doesn’t exist).
 
-Push the following files into the gitbub repository:
+Push the following files into the repository:
 
 `cluster/git-repository.yaml`
 
