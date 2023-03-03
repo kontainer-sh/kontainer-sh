@@ -1,0 +1,17 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: tekton-events
+  namespace: flux-system
+spec:
+  interval: 5m0s
+  sourceRef:
+    kind: GitRepository
+    name: kontainer-sh 
+  path: ./tekton-events
+  dependsOn:
+  - name: tekton-events-base
+  prune: true
+  validation: client
+  targetNamespace: default
+
