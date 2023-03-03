@@ -37,7 +37,7 @@ Install Flux components with Flux bootstrap:
     --read-write-key \
     --components-extra=image-reflector-controller,image-automation-controller
 
-The above command creates the GitHub repository (if it doesn’t exists).
+The above command creates the GitHub repository (if it doesn’t exist).
 
 Push the following files into the gitbub repository:
 
