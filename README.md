@@ -73,9 +73,9 @@ Push the following files into the gitbub repository:
 
 **_NOTE:_** This guide is in progress. Please look for ongoing development.
 # Issues
-- [] A Helm chart for the sample project
-- [] Parametrize several hardcoded values
-- [] SSL
+- Provide a Helm chart for the sample project
+- Parametrize several hardcoded values
+- Support SSL
 # Getting Support
 You can use [GitHub Issues](https://github.com/kontainer-sh/kontainer-sh/issues) or contact me via [info@kontainer.sh](mailto:info@kontainer.sh).
 
