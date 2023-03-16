@@ -77,7 +77,7 @@ Push the following files into the repository:
 - Parametrize several hardcoded values
 - Support SSL
 # Getting Support
-You can use [GitHub Issues](https://github.com/kontainer-sh/kontainer-sh/issues) or contact me via [info@kontainer.sh](mailto:info@kontainer.sh).
+You can use [GitHub Issues](https://github.com/kontainer-sh/kontainer-sh/issues) or contact us via [info@kontainer.sh](mailto:info@kontainer.sh).
 
 Need something that isn't covered here? Visit our [homepage](https://kontainer.sh/) (currently in german language) to learn about all other available offerings and support options.
 # Contribution
