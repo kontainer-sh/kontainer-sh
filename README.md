@@ -1,7 +1,20 @@
 # kontainer.sh
 K8s powered `git push` deployments.
+# Project status
+ALPHA
+# Features
+* Deploy your applications written in various languages without hassle
+* Install your environment in less than one hour
+* Create new projects quickly
+* Integration with GitHub
+* Automatically deploy on new commits - Just push to Git
+* Deploy anywhere on any Kubernetes cluster and cloud provider (no lock-in)
+* Avoid complex setup and DevOps tasks
+* More coding time instead of solving infrastructure problems
+* Focus on building your application and get results
+* Ready to use database instances (planned)
 # Demo
-_Coming soon_
+[![asciicast](https://asciinema.org/a/d6BbvWoOZu99bJZvxiWmI3RAh.svg)](https://asciinema.org/a/d6BbvWoOZu99bJZvxiWmI3RAh)
 # Goals and Motivation
 This Demo repository will deploy and configure:
 * A Tekton CI System (https://tekton.dev/)
@@ -79,6 +92,9 @@ Push the following files into the repository:
 # Getting Support
 You can use [GitHub Issues](https://github.com/kontainer-sh/kontainer-sh/issues) or contact us via [info@kontainer.sh](mailto:info@kontainer.sh).
 
-Need something that isn't covered here? Visit our [homepage](https://kontainer.sh/) (currently in german language) to learn about all other available offerings and support options.
+Need something that isn't covered here? Visit our [homepage](https://kontainer.sh/) (currently in german language) to learn about all other available offerings and support options:
+* „Infrastructure-as-Code“ Tutorial
+* Mentoring
+* DevOps-Insider Newsletter
 # Contribution
 Feel free to fork and create a pull request.
