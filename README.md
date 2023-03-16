@@ -14,7 +14,7 @@ ALPHA
 * Focus on building your application and get results
 * Ready to use database instances (planned)
 # Demo
-[![asciicast](https://asciinema.org/a/d6BbvWoOZu99bJZvxiWmI3RAh.svg)](https://asciinema.org/a/d6BbvWoOZu99bJZvxiWmI3RAh)
+[![asciicast](https://asciinema.org/a/d6BbvWoOZu99bJZvxiWmI3RAh.svg)](https://asciinema.org/a/d6BbvWoOZu99bJZvxiWmI3RAh?autoplay=1)
 # Goals and Motivation
 This Demo repository will deploy and configure:
 * A Tekton CI System (https://tekton.dev/)
