@@ -1,6 +1,6 @@
 # kontainer.sh
 K8s powered `git push` deployments.
-# Project status
+# Project Status
 ALPHA
 # Features
 * Deploy your applications written in various languages without hassle
