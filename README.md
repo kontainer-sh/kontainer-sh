@@ -92,9 +92,8 @@ Push the following files into the repository:
 # Getting Support
 You can use [GitHub Issues](https://github.com/kontainer-sh/kontainer-sh/issues) or contact us via [info@kontainer.sh](mailto:info@kontainer.sh).
 
-Need something that isn't covered here? Visit our [homepage](https://kontainer.sh/) (currently in german language) to learn about all other available offerings and support options:
-* „Infrastructure-as-Code“ Tutorial
-* Mentoring
-* DevOps-Insider Newsletter
+Need something that isn't covered here? Visit [kontainer.sh](https://kontainer.sh/devops-insider/) (currently in german language) to subscribe to the free DevOps-Insider Newsletter. You will get even more free resources that save your time and sanity.
+
+Furthermore, you will find tips&tricks that I share nowhere else.
 # Contribution
 Feel free to fork and create a pull request.
