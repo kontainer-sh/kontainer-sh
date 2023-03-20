@@ -16,6 +16,6 @@ spec:
         app: hello-world
     spec:
       containers:
-        - image: mycluster-registry.localhost:5000/hello-world:1.0 # {"$imagepolicy": "default:my-app-policy"}
+        - image: k3d-myregistry.localhost:5000/hello-world:1.0 # {"$imagepolicy": "default:my-app-policy"}
           imagePullPolicy: Always
           name: hello-world
