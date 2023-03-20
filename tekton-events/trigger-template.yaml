@@ -30,4 +30,4 @@ spec:
               claimName: buildpacks-source-pvc
         params:
           - name: image
-            value: mycluster-registry:5000/hello-world:1.0
+            value: mycluster-registry.localhost:5000/hello-world:1.0
