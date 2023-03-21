@@ -14,7 +14,7 @@ spec:
     - apiVersion: tekton.dev/v1beta1
       kind: PipelineRun
       metadata:
-        name: buildpacks-test-pipeline-run
+        generateName: test-pipeline
       spec:
         serviceAccountName: tekton-kubectl-service-account
         pipelineRef:
