@@ -1,14 +1,14 @@
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
-kind: Kustomization
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
 metadata:
-  name: sample-frontend
-  namespace: flux-system
+  name: sample-app
+  namespace: default
 spec:
-  interval: 5m0s
-  sourceRef:
-    kind: GitRepository
-    name: kontainer-sh
-  path: ./app
-  prune: true
-  validation: client
-  targetNamespace: default
+  interval: 5m
+  releaseName: sample-app
+  chart:
+    spec:
+      chart: test-app
+      sourceRef:
+        kind: HelmRepository
+        name: sample-app
