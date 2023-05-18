@@ -11,5 +11,5 @@ spec:
       chart: test-app
       sourceRef:
         kind: GitRepository
-        name: sample-app
+        name: kontainer-sh
         namespace: flux-system
