@@ -8,7 +8,7 @@ spec:
   releaseName: sample-app
   chart:
     spec:
-      chart: test-app
+      chart: charts/test-app
       sourceRef:
         kind: GitRepository
         name: kontainer-sh
