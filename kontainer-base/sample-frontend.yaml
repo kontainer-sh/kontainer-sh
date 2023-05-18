@@ -10,6 +10,6 @@ spec:
     spec:
       chart: test-app
       sourceRef:
-        kind: HelmRepository
+        kind: GitRepository
         name: sample-app
         namespace: flux-system
