@@ -7,7 +7,6 @@ spec:
     - name: image
       type: string
       description: image URL to push
-  params:
     - name: git_url
       type: string
       description: git repository to use
