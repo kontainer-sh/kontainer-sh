@@ -9,4 +9,4 @@ spec:
     - name: commits
       value: $(body.commits)
     - name: git_url
-      value: https://github.com/kontainer-sh/sample-app.git
+      value: https://github.com/kontainer-sh/test-project.git
