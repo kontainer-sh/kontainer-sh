@@ -12,6 +12,8 @@ spec:
       description: The git repository that hosts context
     - name: git_url
       description: The git repository url
+    - name: source_subpath
+      description: The source subpath
   resourcetemplates:
     - apiVersion: tekton.dev/v1beta1
       kind: PipelineRun
