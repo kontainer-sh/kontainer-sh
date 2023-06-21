@@ -41,7 +41,7 @@ spec:
         - name: APP_IMAGE
           value: "$(params.image)"
         - name: SOURCE_SUBPATH
-          value: "sample-app" # This is the path within the samples repo you want to build (OPTIONAL, default: "")
+          value: "demo" # This is the path within the samples repo you want to build (OPTIONAL, default: "")
         - name: BUILDER_IMAGE
           value: paketobuildpacks/builder:base # This is the builder we want the task to use (REQUIRED)
     - name: restart-deployment
