@@ -8,3 +8,5 @@ spec:
       value: $(body.repository.html_url)
     - name: commits
       value: $(body.commits)
+    - name: git_url
+      value: https://github.com/kontainer-sh/sample-app.git
