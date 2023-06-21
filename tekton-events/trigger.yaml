@@ -22,3 +22,6 @@ spec:
     - ref: github-binding
   template:
     ref: trigger-demo-template
+    params:
+      - name: "git_url"
+        value: https://github.com/kontainer-sh/sample-app.git
