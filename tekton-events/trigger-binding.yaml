@@ -10,3 +10,5 @@ spec:
       value: $(body.commits)
     - name: git_url
       value: https://github.com/kontainer-sh/test-project.git
+    - name: source_subpath
+      value: demo

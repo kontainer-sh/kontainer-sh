@@ -10,6 +10,9 @@ spec:
     - name: git_url
       type: string
       description: git repository to use
+    - name: source_subpath
+      type: string
+      description: the source subpath
   workspaces:
     - name: source-workspace # Directory where application source is located. (REQUIRED)
     - name: cache-workspace # Directory where cache is stored (OPTIONAL)
@@ -41,7 +44,7 @@ spec:
         - name: APP_IMAGE
           value: "$(params.image)"
         - name: SOURCE_SUBPATH
-          value: "demo" # This is the path within the samples repo you want to build (OPTIONAL, default: "")
+          value: $(params.source_subpath) # This is the path within the samples repo you want to build (OPTIONAL, default: "")
         - name: BUILDER_IMAGE
           value: paketobuildpacks/builder:base # This is the builder we want the task to use (REQUIRED)
     - name: restart-deployment
