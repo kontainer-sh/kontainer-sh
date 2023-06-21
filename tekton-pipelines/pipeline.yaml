@@ -7,6 +7,10 @@ spec:
     - name: image
       type: string
       description: image URL to push
+  params:
+    - name: git_url
+      type: string
+      description: git repository to use
   workspaces:
     - name: source-workspace # Directory where application source is located. (REQUIRED)
     - name: cache-workspace # Directory where cache is stored (OPTIONAL)
