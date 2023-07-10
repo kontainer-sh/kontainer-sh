@@ -11,4 +11,4 @@ spec:
     - name: git_url
       value: https://github.com/MissMa19/HelloSpringBoot.git
     - name: source_subpath
-      value: .
+      value: ""
