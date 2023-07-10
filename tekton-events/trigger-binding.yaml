@@ -9,6 +9,6 @@ spec:
     - name: commits
       value: $(body.commits)
     - name: git_url
-      value: https://github.com/kontainer-sh/test-project.git
+      value: https://github.com/MissMa19/HelloSpringBoot.git
     - name: source_subpath
-      value: demo
+      value: .
