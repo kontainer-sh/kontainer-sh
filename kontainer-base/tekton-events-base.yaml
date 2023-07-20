@@ -13,3 +13,6 @@ spec:
   - name: tekton-tasks
   prune: true
   validation: client
+  postBuild:
+    substitute:
+      url_gitrepo: ${url_gitrepo}
