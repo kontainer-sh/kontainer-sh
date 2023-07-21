@@ -11,4 +11,4 @@ spec:
     - name: git_url
       value: ${url_gitrepo}
     - name: source_subpath
-      value: ""
+      value: ${subpath_source}
