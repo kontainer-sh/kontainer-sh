@@ -18,4 +18,4 @@ spec:
     substitute:
       url_gitrepo: ${url_gitrepo}
       subpath_source: ${subpath_source}
-      wh_secret: ${wh_secret}
+      wh_secret: "${wh_secret}"
