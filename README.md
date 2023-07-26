@@ -34,27 +34,10 @@ This Demo repository will deploy and configure:
 * An Ingress controller
 * A local docker registry
 # Installation
-Set GitHub personal access token:
+Create a new repository on GitHub. This repository needs a new folder named "cluster".
+"cluster" gets three new files. In this repository you configure your cluster.
 
-    export GITHUB_TOKEN=<token>
-
-Install Flux components with Flux bootstrap:
-
-    flux bootstrap github \
-    --owner kontainer-sh \
-    --repository flux-test \
-    --personal \
-    --private \
-    --path ./cluster \
-    --branch main \
-    --read-write-key \
-    --components-extra=image-reflector-controller,image-automation-controller
-
-The above command creates the GitHub repository (if it doesn’t exist).
-
-Push the following files into the repository:
-
-`cluster/git-repository.yaml`
+`git-repository.yaml`
 
     apiVersion: source.toolkit.fluxcd.io/v1beta2
     kind: GitRepository
@@ -65,10 +48,12 @@ Push the following files into the repository:
       interval: 5m
       url: https://github.com/kontainer-sh/kontainer-sh.git
       ref:
-        branch: main
+        branch: 15-parametrize-hardcoded-settings
 
-`cluster/kontainer-base.yaml`
 
+`kontainer-base.yaml`
+
+    apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
     kind: Kustomization
     metadata:
       name: kontainer-base
@@ -81,8 +66,57 @@ Push the following files into the repository:
       sourceRef:
         kind: GitRepository
         name: kontainer-sh
+      postBuild:
+        substitute:
+        url_gitrepo: "https://github.com/$USER/$AppRepo.git"
+        subpath_source: "."
+        wh_secret: "topsecret"
 
-(...)
+"url_gitrepo" needs the path to the GitHub repository of the app. So far this needs to be a public repository. 
+If the App isn't in the root directory, you need to set the path in "subpath_source".
+"wh_secret" needs to be a String, only numbers don't work.
+
+`sample-frontend.yaml`
+
+    apiVersion: helm.toolkit.fluxcd.io/v2beta1
+    kind: HelmRelease
+    metadata:
+      name: sample-app
+      namespace: default
+    spec:
+      interval: 5m
+      releaseName: sample-app
+      chart:
+        spec:
+          chart: charts/test-app
+          sourceRef:
+            kind: GitRepository
+            name: kontainer-sh
+            namespace: flux-system
+      values:
+        host: foo.bar.com
+
+Your server needs the following file in the root directory.
+ 
+ `payload.json`
+    
+    {"ref":"refs/heads/main","repository":{"html_url":"http://test"},"commits":[]}
+
+Now you need to run the script "install.sh" on your server.
+    
+    ./install.sh Github_token_(classic) owner_of_repo name_of_repo_with_the_cluster_configuration
+This will install all the necessary software on your server and configures it.
+
+The webhook for the app repository needs to be added. 
+
+* payload url: Server-IP:8080/hooks
+* Contant type: application/json
+* secret: wh_secret from kontainer-base.yaml
+* Just the push event.
+* Active
+
+Now everything is set up and installed.
+
 
 **_NOTE:_** This guide is in progress. Please look for ongoing development.
 # Issues
