@@ -102,12 +102,16 @@ Your server needs the following file in the root directory.
     
     {"ref":"refs/heads/main","repository":{"html_url":"http://test"},"commits":[]}
 
-Now you need to run the script "install.sh" on your server.
+Now you need to run the script "install.sh" on your server. 
+To do so, you need to copy the script to your server and it needs the necessary rights.
+    
+    chmod 775 install.sh
+After that you run the script with its three arguments.
     
     ./install.sh Github_token_(classic) owner_of_repo name_of_repo_with_the_cluster_configuration
 This will install all the necessary software on your server and configures it.
 
-The webhook for the app repository needs to be added. 
+The webhook for the app repository needs to be added at GitHub with following configuration:  
 
 * payload url: Server-IP:8080/hooks
 * Contant type: application/json
