@@ -33,7 +33,55 @@ This Demo repository will deploy and configure:
 * A GitHub repository and a personal access token
 * An Ingress controller
 * A local docker registry
+# AWS server-setup with Terraform
+
+To set up the server from scratch on AWS you can use Terraform. 
+But first you need the necessary software on your computer. 
+First install Terraform with brew on your terminal.
+
+    brew tap hashicorp/tap  
+    brew install hashicorp/tap/terraform
+
+After that we need to install AWS CLI and configure it. 
+For the configuration you need your AWS access key.
+
+    brew install awscli
+    aws configure
+
+Configuration example
+
+    Default region: eu-central-1
+    Default output format: yaml
+
+ After that you need to export your AWS access key.
+
+    export AWS_ACCESS_KEY_ID=yourID
+	export AWS_SECRET_ACCESS_KEY=yourSecret
+
+Now you need to create a directory for terraform files. 
+And copy the file "main.tf" from the directory "terraform" in this project to your folder.
+With this file you will create an Ubuntu server in region "eu-central-1" with 20GB disk space and ports 22, 443 and 8080 open.
+If you want to change the region, you need to change it in "main.tf" and you need to change the ami.
+The server will be reachable via ssh and the script will look for your public key file in the directory "~/.ssh".
+If your public key is in a different directory you need to change this directory in "main.tf" before you can run the script.
+
+Back in the terminal you need to run the following:
+
+    terraform init
+	terraform validate
+ 	terraform plan
+	terraform apply
+
+"terraform init" is only necessary the first time you want to run terraform.
+"terraform validate" checks, if "main.tf" makes sense.
+With "terraform plan" you test everything and get the plan about what will be done, without the possibility of implementing it.
+With "terraform apply" you get the plan of what will be done and you need to confirm it. After that the changes will take place.
+At the end you will see the IP-address of the server. 
+
+Now the server is set up for the installation. 
+
 # Installation
+
 Create a new repository on GitHub. This repository needs a new folder named "cluster".
 "cluster" gets three new files. In this repository you configure your cluster.
 
