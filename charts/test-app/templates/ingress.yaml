@@ -4,9 +4,9 @@ metadata:
   name: sample-ingress
   namespace: default
   annotations:
-    cert-manager.io/cluster-issuer: selfsigned-issuer
-    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    cert-manager.io/issuer: staging-issuer
 spec:
+  ingressClassName: traefik
   rules:
     - host: {{ .Values.host }} 
       http:
@@ -21,4 +21,4 @@ spec:
   tls:
     - hosts:
         - {{ .Values.host }}
-      secretName: test-local-cert-tls
+      secretName: staging-issuer

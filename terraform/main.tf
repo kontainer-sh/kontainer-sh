@@ -61,20 +61,19 @@ resource "aws_security_group" "allow_inbound" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  ingress {
+    description = "TCP on Port 80"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+ }
+
   #ssh
   ingress {
     description = "SSH from VPC"
     from_port   = 22
     to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  #webhook
-  ingress {
-    description = "webhook from github"
-    from_port   = 8080
-    to_port     = 8080
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
