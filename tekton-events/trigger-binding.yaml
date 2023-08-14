@@ -8,3 +8,7 @@ spec:
       value: $(body.repository.html_url)
     - name: commits
       value: $(body.commits)
+    - name: git_url
+      value: ${url_gitrepo}
+    - name: source_subpath
+      value: ${subpath_source}

@@ -10,11 +10,15 @@ spec:
       description: The commits which got pushed
     - name: gitRepository
       description: The git repository that hosts context
+    - name: git_url
+      description: The git repository url
+    - name: source_subpath
+      description: The source subpath
   resourcetemplates:
     - apiVersion: tekton.dev/v1beta1
       kind: PipelineRun
       metadata:
-        name: buildpacks-test-pipeline-run
+        generateName: test-pipeline-
       spec:
         serviceAccountName: tekton-kubectl-service-account
         pipelineRef:
@@ -30,4 +34,8 @@ spec:
               claimName: buildpacks-source-pvc
         params:
           - name: image
-            value: registry.kube-system.svc.cluster.local:80/hello-world:1.0
+            value: k3d-myregistry.localhost:5000/hello-world:1.0
+          - name: git_url
+            value: $(tt.params.git_url)
+          - name: source_subpath
+            value: $(tt.params.source_subpath)
