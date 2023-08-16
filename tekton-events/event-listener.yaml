@@ -9,3 +9,4 @@ spec:
   resources:
     kubernetesResource:
       serviceType: NodePort
+      servicePort: 80
