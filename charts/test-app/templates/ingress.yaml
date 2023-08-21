@@ -4,7 +4,7 @@ metadata:
   name: sample-ingress
   namespace: default
   annotations:
-    cert-manager.io/issuer: staging-issuer
+    cert-manager.io/issuer: {{ .Values.issuer }}
 spec:
   ingressClassName: traefik
   rules:
@@ -21,4 +21,4 @@ spec:
   tls:
     - hosts:
         - {{ .Values.host }}
-      secretName: staging-issuer
+      secretName: {{ .Values.secretName }}
