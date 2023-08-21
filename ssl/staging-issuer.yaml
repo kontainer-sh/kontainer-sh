@@ -3,9 +3,6 @@ kind: Issuer
 metadata:
   name: staging-issuer
 spec:
-  dependsOn:
-    - name: cert-manager
-  targetNamespace: default
   acme:
     server: https://acme-staging-v02.api.letsencrypt.org/directory
     email: info@kontainer.sh
