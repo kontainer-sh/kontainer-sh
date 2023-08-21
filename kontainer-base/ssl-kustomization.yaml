@@ -10,7 +10,7 @@ spec:
     - name: ssl-base
   prune: true
   validation: client
- # targetNamespace: default
+  targetNamespace: default
   sourceRef:
     kind: GitRepository
     name: kontainer-sh
