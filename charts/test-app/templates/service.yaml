@@ -9,13 +9,12 @@ spec:
   ports:
   - name: http
     port: 80
-    protocol: TCP
     targetPort: 8080
+    protocol: TCP
   - name: https
     port: 443
-    protocol: TCP
     targetPort: 8080
+    protocol: TCP
   selector:
     app: hello-world
   sessionAffinity: None
-  type: NodePort

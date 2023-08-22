@@ -3,7 +3,7 @@
 #This script needs three parameters to run:
 #GitHub-token; Owner of the repository; name of the repository with the configuration of the cluster
 
-#If docker is installed, the installation gets skiped
+#If docker is installed, the installation gets skipped
 if which docker > /dev/null; then
 	echo "docker is already installed"
 else
@@ -57,7 +57,7 @@ fi
 k3d cluster delete --all
 k3d registry delete --all
 k3d registry create myregistry.localhost --port 5000
-k3d cluster create --wait -p "8443:443@loadbalancer" -p "8080:80@loadbalancer" --servers 1 --agents 3 --registry-use myregistry.localhost:5000 --k3s-arg '--kubelet-arg=eviction-hard=imagefs.available<1%,nodefs.available<1%@agent:*' --k3s-arg '--kubelet-arg=eviction-minimum-reclaim=imagefs.available=1%,nodefs.available=1%@agent:*'
+k3d cluster create --wait -p "443:443@loadbalancer" -p "80:80@loadbalancer" --servers 1 --agents 3 --registry-use myregistry.localhost:5000 --k3s-arg '--kubelet-arg=eviction-hard=imagefs.available<1%,nodefs.available<1%@agent:*' --k3s-arg '--kubelet-arg=eviction-minimum-reclaim=imagefs.available=1%,nodefs.available=1%@agent:*'
 
 #Step 10
 export GITHUB_TOKEN=$1
