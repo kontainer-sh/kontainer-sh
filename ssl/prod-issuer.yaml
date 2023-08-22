@@ -7,7 +7,7 @@ spec:
     server: https://acme-v02.api.letsencrypt.org/directory
     email: info@kontainer.sh
     privateKeySecretRef:
-      name: prod-issuer
+      name: prod-issuer-key
     solvers:
       - http01:
           ingress:
