@@ -13,8 +13,8 @@ ALPHA
 * More coding time instead of solving infrastructure problems
 * Focus on building your application and get results
 * Ready to use database instances (planned)
-# Demo
-[![asciicast](https://asciinema.org/a/d6BbvWoOZu99bJZvxiWmI3RAh.svg)](https://asciinema.org/a/d6BbvWoOZu99bJZvxiWmI3RAh?autoplay=1)
+
+
 # Goals and Motivation
 This Demo repository will deploy and configure:
 * A Tekton CI System (https://tekton.dev/)
@@ -26,13 +26,10 @@ This Demo repository will deploy and configure:
 * The pipeline is triggered by a GitHub webhook
 * This project is to be expanded into an Open Source PaaS in the future
 # Requirements
-* Kubernetes (https://kubernetes.io/)
-* Flux (https://fluxcd.io/)
-* kubectl (https://kubernetes.io/docs/tasks/tools/)
-* Tekton Pipelines CLI (https://tekton.dev/docs/cli/)
+* MacOS
 * A GitHub repository and a personal access token
-* An Ingress controller
-* A local docker registry
+* An account at AWS (Amazon Web Services)
+
 # AWS server-setup with Terraform
 
 To set up the server from scratch on AWS you can use Terraform. 
@@ -60,7 +57,7 @@ Configuration example
 
 Now you need to create a directory for terraform files. 
 And copy the file "main.tf" from the directory "terraform" in this project to your folder.
-With this file you will create an Ubuntu server in region "eu-central-1" with 20GB disk space and ports 22, 443 and 8080 open.
+With this file you will create an Ubuntu server in region "eu-central-1" with 20GB disk space and ports 22, 443 and 80 open.
 If you want to change the region, you need to change it in "main.tf" and you need to change the ami.
 The server will be reachable via ssh and the script will look for your public key file in the directory "~/.ssh".
 If your public key is in a different directory you need to change this directory in "main.tf" before you can run the script.
@@ -96,7 +93,7 @@ Create a new repository on GitHub. This repository needs a new folder named "clu
       interval: 5m
       url: https://github.com/kontainer-sh/kontainer-sh.git
       ref:
-        branch: 15-parametrize-hardcoded-settings
+        branch: main
 
 
 `kontainer-base.yaml`
@@ -167,20 +164,20 @@ This will install all the necessary software on your server and configures it.
 
 The webhook for the app repository needs to be added at GitHub with following configuration:  
 
-* payload url: Server-IP:8080/hooks
+* payload url: Server-IP/hooks
 * Contant type: application/json
 * secret: wh_secret from kontainer-base.yaml
 * Just the push event.
 * Active
 
-Now everything is set up and installed.
+Now everything is set up and installed. To trigger the first installation of the app, you need to wait for the pod
+"el-trigger-demo-el-xxx" to be ready. After the pod is ready you need to trigger a push event in your GitHub-repository with your app-code.
+After a while your app-pod gets the status "running" and after that everything is ready.
+
 
 
 **_NOTE:_** This guide is in progress. Please look for ongoing development.
-# Issues
-- Provide a Helm chart for the sample project
-- Parametrize several hardcoded values
-- Support SSL
+
 # Getting Support
 You can use [GitHub Issues](https://github.com/kontainer-sh/kontainer-sh/issues) or contact us via [info@kontainer.sh](mailto:info@kontainer.sh).
 
