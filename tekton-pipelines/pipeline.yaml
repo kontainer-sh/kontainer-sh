@@ -46,7 +46,7 @@ spec:
         - name: SOURCE_SUBPATH
           value: $(params.source_subpath) # This is the path within the samples repo you want to build (OPTIONAL, default: "")
         - name: BUILDER_IMAGE
-          value: paketobuildpacks/builder:full # This is the builder we want the task to use (REQUIRED)
+          value: paketobuildpacks/builder:base # This is the builder we want the task to use (REQUIRED)
     - name: restart-deployment
       runAfter:
         - buildpacks
