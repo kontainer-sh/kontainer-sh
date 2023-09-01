@@ -34,7 +34,7 @@ spec:
               claimName: buildpacks-source-pvc
         params:
           - name: image
-            value: $(params.image_app) #k3d-myregistry.localhost:5000/hello-world:1.0
+            value: $(tt.params.image_app) #k3d-myregistry.localhost:5000/hello-world:1.0
           - name: git_url
             value: $(tt.params.git_url)
           - name: source_subpath
