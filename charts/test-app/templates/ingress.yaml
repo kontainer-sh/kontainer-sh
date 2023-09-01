@@ -15,7 +15,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: hello-world #{{ .Values.appname }}
+                name: {{ .Values.appname }}  #hello-world
                 port:
                   number: 80
   tls:
