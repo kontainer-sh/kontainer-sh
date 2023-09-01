@@ -13,4 +13,4 @@ spec:
     - name: source_subpath
       value: ${subpath_source}
     - name: image_app
-      value: ${app_image} #from kontainer-base.yaml
+      value: ${app_image} #from tekton-events.yaml
