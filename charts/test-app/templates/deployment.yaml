@@ -2,20 +2,20 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: hello-world #{{ .Values.appname }}
-  name: hello-world
+    app: {{ .Values.appname }} #hello-world
+  name: {{ .Values.appname }} #hello-world
   namespace: default
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: hello-world
+      app: {{ .Values.appname }} #hello-world
   template:
     metadata:
       labels:
-        app: hello-world
+        app: {{ .Values.appname }} #hello-world
     spec:
       containers:
         - image: k3d-myregistry.localhost:5000/hello-world:1.0 # {"$imagepolicy": "default:my-app-policy"}
           imagePullPolicy: Always
-          name: hello-world
+          name: {{ .Values.appname }} #hello-world
