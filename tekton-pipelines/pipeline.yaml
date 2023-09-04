@@ -27,7 +27,7 @@ spec:
         - name: url
           value: "$(params.git_url)"
         - name: subdirectory
-          value: ""
+          value: ""  #This needs to be the root directory, otherwise gitclone will create a subdirectory.
         - name: deleteExisting
           value: "true"
     - name: buildpacks # This task uses the `buildpacks` task to build the application
@@ -42,7 +42,7 @@ spec:
           workspace: cache-workspace
       params:
         - name: APP_IMAGE
-          value: "$(params.image)"
+          value: "$(params.image_app)" # From trigger-template.yaml
         - name: SOURCE_SUBPATH
           value: $(params.source_subpath) # This is the path within the samples repo you want to build (OPTIONAL, default: "")
         - name: BUILDER_IMAGE

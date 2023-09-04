@@ -14,7 +14,7 @@ spec:
       description: The git repository url
     - name: source_subpath
       description: The source subpath
-    - name: image
+    - name: image_app
       description: The app image
   resourcetemplates:
     - apiVersion: tekton.dev/v1beta1
@@ -35,7 +35,7 @@ spec:
             persistentVolumeClaim:
               claimName: buildpacks-source-pvc
         params:
-          - name: image
+          - name: image_app
             value: $(tt.params.image_app) #k3d-myregistry.localhost:5000/hello-world:1.0
           - name: git_url
             value: $(tt.params.git_url)
