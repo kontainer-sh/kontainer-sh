@@ -4,7 +4,7 @@ metadata:
   name: buildpacks-test-pipeline
 spec:
   params:
-    - name: image
+    - name: image_app
       type: string
       description: image URL to push
     - name: git_url
