@@ -14,6 +14,8 @@ spec:
       description: The git repository url
     - name: source_subpath
       description: The source subpath
+    - name: image
+      description: The app image
   resourcetemplates:
     - apiVersion: tekton.dev/v1beta1
       kind: PipelineRun
