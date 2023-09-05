@@ -12,5 +12,7 @@ spec:
       value: ${url_gitrepo}
     - name: source_subpath
       value: ${subpath_source}
+    - name: name_app
+      value: ${app_name}
     - name: image_app
       value: ${app_image} #from tekton-events.yaml

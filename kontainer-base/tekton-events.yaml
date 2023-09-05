@@ -19,4 +19,5 @@ spec:
       url_gitrepo: ${url_gitrepo}
       subpath_source: ${subpath_source}
       wh_secret: ${wh_secret}
+      app_name: ${app_name}
       app_image: ${app_image} #from kontainer-base.yaml

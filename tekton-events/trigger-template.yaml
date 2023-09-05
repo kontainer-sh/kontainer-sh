@@ -16,6 +16,8 @@ spec:
       description: The source subpath
     - name: image_app
       description: The app image
+    - name: name_app
+      description: The name of the app
   resourcetemplates:
     - apiVersion: tekton.dev/v1beta1
       kind: PipelineRun
@@ -41,3 +43,5 @@ spec:
             value: $(tt.params.git_url)
           - name: source_subpath
             value: $(tt.params.source_subpath)
+          - name: name_app
+            value: $(tt.params.name_app) #From tekton-binding.yaml
