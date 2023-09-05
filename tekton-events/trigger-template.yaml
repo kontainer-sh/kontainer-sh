@@ -26,7 +26,7 @@ spec:
       spec:
         serviceAccountName: tekton-kubectl-service-account
         pipelineRef:
-          name: buildpacks-pipeline #mod
+          name: buildpacks-test-pipeline #mod
         workspaces:
           - name: source-workspace
             subPath: source
