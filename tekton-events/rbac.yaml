@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: tekton-triggers-example-sa
+  name: tekton-triggers-sa #-example
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -9,7 +9,7 @@ metadata:
   name: triggers-example-eventlistener-binding
 subjects:
 - kind: ServiceAccount
-  name: tekton-triggers-example-sa
+  name: tekton-triggers-sa #-example
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -21,7 +21,7 @@ metadata:
   name: triggers-example-eventlistener-clusterbinding
 subjects:
 - kind: ServiceAccount
-  name: tekton-triggers-example-sa
+  name: tekton-triggers-sa #-example
   namespace: default
 roleRef:
   apiGroup: rbac.authorization.k8s.io
