@@ -14,3 +14,6 @@ spec:
   sourceRef:
     kind: GitRepository
     name: kontainer-sh
+  postBuild:
+    substitute:
+      cm_email: ${cm_email} #from kontainer-base.yaml

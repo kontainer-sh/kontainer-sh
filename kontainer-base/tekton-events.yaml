@@ -20,4 +20,3 @@ spec:
       subpath_source: ${subpath_source}
       wh_secret: ${wh_secret}
       app_image: ${app_image} #from kontainer-base.yaml
-      cm_email: ${cm_email} #from kontainer-base.yaml
