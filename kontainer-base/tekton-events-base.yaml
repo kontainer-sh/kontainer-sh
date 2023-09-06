@@ -12,4 +12,3 @@ spec:
   dependsOn:
   - name: tekton-tasks
   prune: true
- # validation: client

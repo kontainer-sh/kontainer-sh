@@ -21,4 +21,4 @@ spec:
   bindings:
     - ref: github-binding
   template:
-    ref: trigger-template #trigger-demo-template
+    ref: trigger-template

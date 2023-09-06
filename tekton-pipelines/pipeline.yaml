@@ -28,7 +28,7 @@ spec:
           workspace: source-workspace
       params:
         - name: url
-          value: "$(params.git_url)"
+          value: "$(params.git_url)" #from trigger-template.yaml
         - name: subdirectory
           value: ""  #This needs to be the root directory, otherwise gitclone will create a subdirectory.
         - name: deleteExisting
@@ -58,4 +58,4 @@ spec:
       params:
       - name: script
         value: |
-          kubectl -n default rollout restart deploy $(params.name_app)
+          kubectl -n default rollout restart deploy $(params.name_app) 

@@ -117,13 +117,18 @@ In this repository, you configure your cluster:
         url_gitrepo: "https://github.com/$USER/$AppRepo.git"
         subpath_source: "."
         wh_secret: "topsecret"
+        app_name: "hello-world"
+        app_image: "k3d-myregistry.localhost:5000/hello-world:1.0"
+        cm_email: "foo@bar.com"
 
 "url_gitrepo" needs the path to the GitHub repository of the app. 
 So far, this needs to be a public repository. 
 If the App isn't in the root directory, you need to set the path in "subpath_source." 
 "wh_secret" needs to be a String; only numbers don't work.
+"cm_email" is the e-mail-address for cert-manager. 
+This address will get notifications, for example when a certificate gets old.
 
-`sample-frontend.yaml`
+`helm-frontend.yaml`
 
     apiVersion: helm.toolkit.fluxcd.io/v2beta1
     kind: HelmRelease
@@ -144,6 +149,8 @@ If the App isn't in the root directory, you need to set the path in "subpath_sou
         host: foo.bar.com
         issuer: staging-issuer #prod-issuer
         secretName: staging-issuer #prod-issuer
+        appname: hello-world
+        appimage: k3d-myregistry.localhost:5000/hello-world:1.0
 
 In values, you need to enter the host where the app will be found. 
 With this configuration, the cert-manager will use the staging API from Let's Encrypt. 
@@ -173,7 +180,7 @@ The webhook for the app repository needs to be added on GitHub with the followin
 * Active
 
 Now everything is set up and installed. 
-To trigger the first installation of the app, you need to wait for the pod "el-trigger-demo-el-xxx" to be ready. 
+To trigger the first installation of the app, you need to wait for the pod "el-trigger-el-xxx" to be ready. 
 After the pod is ready, you need to trigger a push event in your GitHub repository with your app code. 
 After a while, your app pod gets the status "running," and after that, everything is ready.
 

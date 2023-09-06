@@ -3,7 +3,7 @@ kind: EventListener
 metadata:
   name: trigger-el
 spec:
-  serviceAccountName: tekton-triggers-sa  #-example
+  serviceAccountName: tekton-triggers-sa
   triggers:
     - triggerRef: github-listener
   resources:

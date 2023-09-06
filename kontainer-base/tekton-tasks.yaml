@@ -13,5 +13,4 @@ spec:
   dependsOn:
   - name: tekton-base
   prune: true
-  #validation: client
   targetNamespace: default
