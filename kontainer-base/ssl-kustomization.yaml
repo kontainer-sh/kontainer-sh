@@ -9,7 +9,7 @@ spec:
   dependsOn:
     - name: ssl-base
   prune: true
-  validation: client
+ # validation: client
   targetNamespace: default
   sourceRef:
     kind: GitRepository

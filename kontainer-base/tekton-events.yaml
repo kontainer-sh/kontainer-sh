@@ -12,7 +12,7 @@ spec:
   dependsOn:
   - name: tekton-events-base
   prune: true
-  validation: client
+ # validation: client
   targetNamespace: default
   postBuild:
     substitute:
