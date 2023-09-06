@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
-  name: buildpacks-test-pipeline
+  name: buildpacks-app-pipeline
 spec:
   params:
     - name: name_app
