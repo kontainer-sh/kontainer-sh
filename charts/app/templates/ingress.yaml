@@ -1,10 +1,10 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: main-ingress #sample-ingress
+  name: main-ingress
   namespace: default
   annotations:
-    cert-manager.io/issuer: {{ .Values.issuer }}
+    cert-manager.io/issuer: {{ .Values.issuer }} #From sample-frontend.yaml
 spec:
   ingressClassName: traefik
   rules:
@@ -15,7 +15,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: {{ .Values.appname }}  #hello-world
+                name: {{ .Values.appname }}
                 port:
                   number: 80
   tls:
