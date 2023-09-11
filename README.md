@@ -55,8 +55,8 @@ After that, you need to export your AWS access key.
     export AWS_ACCESS_KEY_ID=yourID
     export AWS_SECRET_ACCESS_KEY=yourSecret
 
-Now you need to create a directory for Terraform files and copy the file "main.tf" from the directory "terraform" in this project to your folder. 
-With this file, you will create an Ubuntu server in the "eu-central-1" region with 20GB disk space and ports 22, 443, and 80 open. 
+Now you need to create a directory for Terraform files and copy the file "main.tf", "terraform.tfvars" and "vars.tf" from the directory "terraform" in this project to your folder. 
+With this files, you will create an Ubuntu server in the "eu-central-1" region with 20GB disk space and ports 22, 443, and 80 open. 
 If you want to change the region, you need to modify it in "main.tf," and you need to change the AMI. 
 The server will be reachable via SSH, and the script will look for your public key file in the directory "~/.ssh". 
 If your public key is in a different directory, you need to change this directory in "main.tf" before you can run the script.
