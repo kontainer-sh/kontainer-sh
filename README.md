@@ -55,8 +55,9 @@ After that, you need to export your AWS access key.
     export AWS_ACCESS_KEY_ID=yourID
     export AWS_SECRET_ACCESS_KEY=yourSecret
 
-Now you need to create a directory for Terraform files and copy the file "main.tf", "terraform.tfvars" and "vars.tf" from the directory "terraform" in this project to your folder. 
-With this files, you will create an Ubuntu server in the "eu-central-1" region with 20GB disk space and ports 22, 443, and 80 open. 
+Now you need to create a directory for Terraform files and copy the file "main.tf", "terraform.tfvars" and "vars.tf" 
+from the directory "terraform" in this project to your folder. In "terraform.tfvars" are variables that can be changed to your liking. 
+With all these files, you will create an Ubuntu server in the "eu-central-1" region with 20GB disk space and ports 22, 443, and 80 open. 
 If you want to change the region, you need to modify it in "main.tf," and you need to change the AMI. 
 The server will be reachable via SSH, and the script will look for your public key file in the directory "~/.ssh". 
 If your public key is in a different directory, you need to change this directory in "main.tf" before you can run the script.
@@ -114,12 +115,12 @@ In this repository, you configure your cluster:
         name: kontainer-sh
       postBuild:
         substitute:
-        url_gitrepo: "https://github.com/$USER/$AppRepo.git"
-        subpath_source: "."
-        wh_secret: "topsecret"
-        app_name: "hello-world"
-        app_image: "k3d-myregistry.localhost:5000/hello-world:1.0"
-        cm_email: "foo@bar.com"
+          url_gitrepo: "https://github.com/$USER/$AppRepo.git"
+          subpath_source: "."
+          wh_secret: "topsecret"
+          app_name: "hello-world"
+          app_image: "k3d-myregistry.localhost:5000/hello-world:1.0"
+          cm_email: "foo@bar.com"
 
 "url_gitrepo" needs the path to the GitHub repository of the app. 
 So far, this needs to be a public repository. 
@@ -133,14 +134,14 @@ This address will get notifications, for example when a certificate gets old.
     apiVersion: helm.toolkit.fluxcd.io/v2beta1
     kind: HelmRelease
     metadata:
-      name: sample-app
+      name: app
       namespace: default
     spec:
       interval: 5m
-      releaseName: sample-app
+      releaseName: app
       chart:
         spec:
-          chart: charts/test-app
+          chart: charts/app
           sourceRef:
             kind: GitRepository
             name: kontainer-sh
