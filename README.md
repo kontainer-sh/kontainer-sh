@@ -157,12 +157,6 @@ In values, you need to enter the host where the app will be found.
 With this configuration, the cert-manager will use the staging API from Let's Encrypt. 
 If you want to use the production API, you need to change the issuer and the secretName to "prod-issuer."
 
-Your server needs the following file in the root directory.
- 
- `payload.json`
-    
-    {"ref":"refs/heads/main","repository":{"html_url":"http://test"},"commits":[]}
-
 Now you need to run the script "install.sh" on your server. 
 To do so, you need to copy the script to your server, and it needs the necessary rights.
     
