@@ -55,8 +55,9 @@ After that, you need to export your AWS access key.
     export AWS_ACCESS_KEY_ID=yourID
     export AWS_SECRET_ACCESS_KEY=yourSecret
 
-Now you need to create a directory for Terraform files and copy the file "main.tf" from the directory "terraform" in this project to your folder. 
-With this file, you will create an Ubuntu server in the "eu-central-1" region with 20GB disk space and ports 22, 443, and 80 open. 
+Now you need to create a directory for Terraform files and copy the file "main.tf", "terraform.tfvars" and "vars.tf" 
+from the directory "terraform" in this project to your folder. In "terraform.tfvars" are variables that can be changed to your liking. 
+With all these files, you will create an Ubuntu server in the "eu-central-1" region with 20GB disk space and ports 22, 443, and 80 open. 
 If you want to change the region, you need to modify it in "main.tf," and you need to change the AMI. 
 The server will be reachable via SSH, and the script will look for your public key file in the directory "~/.ssh". 
 If your public key is in a different directory, you need to change this directory in "main.tf" before you can run the script.
@@ -114,28 +115,33 @@ In this repository, you configure your cluster:
         name: kontainer-sh
       postBuild:
         substitute:
-        url_gitrepo: "https://github.com/$USER/$AppRepo.git"
-        subpath_source: "."
-        wh_secret: "topsecret"
+          url_gitrepo: "https://github.com/$USER/$AppRepo.git"
+          subpath_source: "."
+          wh_secret: "topsecret"
+          app_name: "hello-world"
+          app_image: "k3d-myregistry.localhost:5000/hello-world:1.0"
+          cm_email: "foo@bar.com"
 
 "url_gitrepo" needs the path to the GitHub repository of the app. 
 So far, this needs to be a public repository. 
 If the App isn't in the root directory, you need to set the path in "subpath_source." 
 "wh_secret" needs to be a String; only numbers don't work.
+"cm_email" is the e-mail-address for cert-manager. 
+This address will get notifications, for example when a certificate gets old.
 
-`sample-frontend.yaml`
+`helm-frontend.yaml`
 
     apiVersion: helm.toolkit.fluxcd.io/v2beta1
     kind: HelmRelease
     metadata:
-      name: sample-app
+      name: app
       namespace: default
     spec:
       interval: 5m
-      releaseName: sample-app
+      releaseName: app
       chart:
         spec:
-          chart: charts/test-app
+          chart: charts/app
           sourceRef:
             kind: GitRepository
             name: kontainer-sh
@@ -144,16 +150,12 @@ If the App isn't in the root directory, you need to set the path in "subpath_sou
         host: foo.bar.com
         issuer: staging-issuer #prod-issuer
         secretName: staging-issuer #prod-issuer
+        appname: hello-world
+        appimage: k3d-myregistry.localhost:5000/hello-world:1.0
 
 In values, you need to enter the host where the app will be found. 
 With this configuration, the cert-manager will use the staging API from Let's Encrypt. 
 If you want to use the production API, you need to change the issuer and the secretName to "prod-issuer."
-
-Your server needs the following file in the root directory.
- 
- `payload.json`
-    
-    {"ref":"refs/heads/main","repository":{"html_url":"http://test"},"commits":[]}
 
 Now you need to run the script "install.sh" on your server. 
 To do so, you need to copy the script to your server, and it needs the necessary rights.
@@ -173,7 +175,7 @@ The webhook for the app repository needs to be added on GitHub with the followin
 * Active
 
 Now everything is set up and installed. 
-To trigger the first installation of the app, you need to wait for the pod "el-trigger-demo-el-xxx" to be ready. 
+To trigger the first installation of the app, you need to wait for the pod "el-trigger-el-xxx" to be ready. 
 After the pod is ready, you need to trigger a push event in your GitHub repository with your app code. 
 After a while, your app pod gets the status "running," and after that, everything is ready.
 

@@ -1,7 +1,7 @@
 apiVersion: triggers.tekton.dev/v1beta1
 kind: TriggerTemplate
 metadata:
-  name: trigger-demo-template
+  name: trigger-template
   annotations:
     triggers.tekton.dev/old-escape-quotes: "true"
 spec:
@@ -14,15 +14,19 @@ spec:
       description: The git repository url
     - name: source_subpath
       description: The source subpath
+    - name: image_app
+      description: The app image
+    - name: name_app
+      description: The name of the app
   resourcetemplates:
     - apiVersion: tekton.dev/v1beta1
       kind: PipelineRun
       metadata:
-        generateName: test-pipeline-
+        generateName: app-pipeline-
       spec:
         serviceAccountName: tekton-kubectl-service-account
         pipelineRef:
-          name: buildpacks-test-pipeline
+          name: buildpacks-app-pipeline #mod
         workspaces:
           - name: source-workspace
             subPath: source
@@ -33,9 +37,11 @@ spec:
             persistentVolumeClaim:
               claimName: buildpacks-source-pvc
         params:
-          - name: image
-            value: k3d-myregistry.localhost:5000/hello-world:1.0
+          - name: image_app
+            value: $(tt.params.image_app) #from trigger-binding.yaml
           - name: git_url
-            value: $(tt.params.git_url)
+            value: $(tt.params.git_url) #from trigger-binding.yaml
           - name: source_subpath
-            value: $(tt.params.source_subpath)
+            value: $(tt.params.source_subpath) #from trigger-binding.yaml
+          - name: name_app
+            value: $(tt.params.name_app) #from trigger-binding.yaml

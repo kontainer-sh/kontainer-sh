@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Values.appname }} #from helm-frontend.yaml
+  name: {{ .Values.appname }} #from helm-frontend.yaml
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.appname }} #from helm-frontend.yaml
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.appname }} #from helm-frontend.yaml
+    spec:
+      containers:
+        - image: {{ .Values.appimage }} #from helm-frontend.yaml
+          imagePullPolicy: Always
+          name: {{ .Values.appname }} #from helm-frontend.yaml

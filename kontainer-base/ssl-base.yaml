@@ -6,11 +6,7 @@ metadata:
 spec:
   interval: 5m
   path: ./ssl-base
-  # dependsOn:
-  #   - name: tekton-events
   prune: true
-  validation: client
-  # targetNamespace: default
   sourceRef:
     kind: GitRepository
     name: kontainer-sh

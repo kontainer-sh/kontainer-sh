@@ -1,10 +1,13 @@
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
-  name: buildpacks-test-pipeline
+  name: buildpacks-app-pipeline
 spec:
   params:
-    - name: image
+    - name: name_app
+      type: string
+      description: app name
+    - name: image_app
       type: string
       description: image URL to push
     - name: git_url
@@ -25,9 +28,9 @@ spec:
           workspace: source-workspace
       params:
         - name: url
-          value: "$(params.git_url)"
+          value: "$(params.git_url)" #from trigger-template.yaml
         - name: subdirectory
-          value: ""
+          value: ""  #This needs to be the root directory, otherwise gitclone will create a subdirectory.
         - name: deleteExisting
           value: "true"
     - name: buildpacks # This task uses the `buildpacks` task to build the application
@@ -42,7 +45,7 @@ spec:
           workspace: cache-workspace
       params:
         - name: APP_IMAGE
-          value: "$(params.image)"
+          value: "$(params.image_app)" # From trigger-template.yaml
         - name: SOURCE_SUBPATH
           value: $(params.source_subpath) # This is the path within the samples repo you want to build (OPTIONAL, default: "")
         - name: BUILDER_IMAGE
@@ -55,20 +58,4 @@ spec:
       params:
       - name: script
         value: |
-          kubectl -n default rollout restart deploy hello-world
-    - name: display-results
-      runAfter:
-        - restart-deployment
-      taskSpec:
-        steps:
-          - name: print
-            image: docker.io/library/bash:5.1.4@sha256:b208215a4655538be652b2769d82e576bc4d0a2bb132144c060efc5be8c3f5d6
-            script: |
-              #!/usr/bin/env bash
-              set -e
-              echo "Digest of created app image: $(params.DIGEST)"              
-        params:
-          - name: DIGEST
-      params:
-        - name: DIGEST
-          value: $(tasks.buildpacks.results.APP_IMAGE_DIGEST)
+          kubectl -n default rollout restart deploy $(params.name_app) 

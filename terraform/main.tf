@@ -32,7 +32,7 @@ resource "aws_instance" "app_server" {
   }
 
   tags = {
-    Name = "ExampleAppServerInstance"
+    Name = var.servername
   }
 }
 
@@ -43,13 +43,13 @@ resource "aws_eip" "try" {
 
 
 resource "aws_key_pair" "user" {
-  key_name   = "key_User"
+  key_name   = var.keyname
   public_key = file("~/.ssh/id_rsa.pub")
 }
 
 
 resource "aws_security_group" "allow_inbound" {
-  name        = "allow_inbound"
+  name        = var.sgname
   description = "Allow inbound traffic"
 
   #tls
@@ -87,7 +87,7 @@ resource "aws_security_group" "allow_inbound" {
   }
 
   tags = {
-    Name = "allow_inbound"
+    Name = var.sgname
   }
 }
 

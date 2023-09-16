@@ -9,6 +9,10 @@ spec:
     - name: commits
       value: $(body.commits)
     - name: git_url
-      value: ${url_gitrepo}
+      value: ${url_gitrepo} #from tekton-events.yaml
     - name: source_subpath
-      value: ${subpath_source}
+      value: ${subpath_source} #from tekton-events.yaml
+    - name: name_app
+      value: ${app_name} #from tekton-events.yaml
+    - name: image_app
+      value: ${app_image} #from tekton-events.yaml

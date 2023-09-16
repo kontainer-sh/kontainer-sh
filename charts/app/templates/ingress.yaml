@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: main-ingress
+  namespace: default
+  annotations:
+    cert-manager.io/issuer: {{ .Values.issuer }} #From helm-frontend.yaml
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: {{ .Values.host }} #From helm-frontend.yaml
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.appname }} #From helm-frontend.yaml
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - {{ .Values.host }} #From helm-frontend.yaml
+      secretName: {{ .Values.secretName }} #From helm-frontend.yaml

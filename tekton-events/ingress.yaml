@@ -12,6 +12,6 @@ spec:
             pathType: Exact
             backend:
               service:
-                name: el-trigger-demo-el
+                name: el-trigger-el
                 port:
                   number: 80
