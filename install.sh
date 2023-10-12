@@ -57,7 +57,7 @@ fi
 k3d cluster delete --all
 k3d registry delete --all
 k3d registry create myregistry.localhost --port 5000
-k3d cluster create --wait -p "443:443@loadbalancer" -p "80:80@loadbalancer" --servers 1 --agents 3 --registry-use myregistry.localhost:5000 --k3s-arg '--kubelet-arg=eviction-hard=imagefs.available<1%,nodefs.available<1%@agent:*' --k3s-arg '--kubelet-arg=eviction-minimum-reclaim=imagefs.available=1%,nodefs.available=1%@agent:*'
+k3d cluster create --wait -p "443:443@loadbalancer" -p "80:80@loadbalancer" --servers 1 --agents 4 --registry-use myregistry.localhost:5000 --k3s-arg '--kubelet-arg=eviction-hard=imagefs.available<1%,nodefs.available<1%@agent:*' --k3s-arg '--kubelet-arg=eviction-minimum-reclaim=imagefs.available=1%,nodefs.available=1%@agent:*'
 
 #Step 10
 export GITHUB_TOKEN=$1

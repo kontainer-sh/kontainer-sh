@@ -78,7 +78,7 @@ At the end, you will see the IP address of the server.
 
 Now the server is set up for the installation.
 
-# Installation
+# Installation (Part one)
 
 Create a new repository on GitHub. 
 This repository needs a new folder named "cluster," which gets three new files. 
@@ -157,6 +157,65 @@ In values, you need to enter the host where the app will be found.
 With this configuration, the cert-manager will use the staging API from Let's Encrypt. 
 If you want to use the production API, you need to change the issuer and the secretName to "prod-issuer."
 
+## DB-Setup
+
+If your app uses a database, you need to add the following files to the cluster repository to install MariaDB. If you don't need a database,
+you can skip this step and continue with "Installation (part two)".
+
+`db-helm.yaml`
+
+    apiVersion: helm.toolkit.fluxcd.io/v2beta1
+    kind: HelmRelease
+    metadata:
+      name: maria-database
+      namespace: default
+    spec:
+      interval: 5m
+        chart:
+          spec:
+            chart: mariadb
+            version: '13.1.x'
+            sourceRef:
+              kind: HelmRepository
+              name: maria-database
+              namespace: flux-system
+            interval: 1m
+        values:
+          auth:
+            rootPassword: password
+          replicaCount: 1
+
+Under rootPassword you set the password for the user "root". You need this information for the connection setup in your app.
+
+`db-source.yaml`
+
+    apiVersion: source.toolkit.fluxcd.io/v1beta2
+    kind: HelmRepository
+    metadata:
+      name: maria-database
+      namespace: flux-system
+    spec:
+      type: oci
+      interval: 5m0s
+      url: oci://registry-1.docker.io/bitnamicharts
+
+The database is reachable under the name "maria-database-mariadb.default.svc.cluster.local" and the port is 3306. 
+The name of the database is "my_database". The username is "root" and the password is set in "db-helm.yaml". Here is an example
+of the application.properties from a springboot project.
+
+`application.properties`
+
+    spring.datasource.url=jdbc:mariadb://maria-database-mariadb.default.svc.cluster.local:3306/my_database
+    spring.datasource.username=root
+    spring.datasource.password=password
+    spring.jpa.generate-dll=true
+    spring.jpa.hibernate.dll-auto=create-drop
+
+In this file the table of the database gets dropped and created everytime you start the app anew, so it's just for test purposes.
+Now you should have five files in the cluster repository, and you can continue with the installation.
+
+# Installation (part two)
+
 Now you need to run the script "install.sh" on your server. 
 To do so, you need to copy the script to your server, and it needs the necessary rights.
     
@@ -164,7 +223,7 @@ To do so, you need to copy the script to your server, and it needs the necessary
 After that, you run the script with its three arguments.
     
     ./install.sh Github_token_(classic) owner_of_repo name_of_repo_with_the_cluster_configuration
-This will install all the necessary software on your server and configure it.
+This will install all the necessary software on your server and configures it.
 
 The webhook for the app repository needs to be added on GitHub with the following configuration:
 
